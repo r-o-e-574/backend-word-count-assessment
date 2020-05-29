@@ -47,11 +47,9 @@ def print_words(filename):
     by word for the given file.
     """
     word_dict = create_word_dict(filename)
-    wordList = []
-    for key in word_dict:
-        wordList.append(key)
-        print(key, ":", word_dict[key])
-    return sorted(wordList)
+    for key in sorted(word_dict):
+        print(key, ":", str(word_dict[key]))
+    return word_dict
 
 
 def print_top(filename):
