@@ -34,12 +34,13 @@ def create_word_dict(filename):
     """Returns a word/count dict for the given file."""
     wordCount = {}
     with open(filename, 'r') as textfile:
-        for line in textfile.readlines():
+        for line in textfile:
             for word in line.split():
-                if word in wordCount:
-                    wordCount[word.lower()] += 1
+                text = word.lower()
+                if text in wordCount:
+                    wordCount[text] += 1
                 else:
-                    wordCount[word.lower()] = 1
+                    wordCount[text] = 1
     return wordCount
 
 def print_words(filename):
