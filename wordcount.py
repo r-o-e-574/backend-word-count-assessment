@@ -25,29 +25,43 @@ should return a dictionary with words as keys, and their counts as values.
 
 # Your name, plus anyone who helped you with this assignment
 # Give credit where credit is due.
-__author__ = "???"
+__author__ = "Ruben Espino I got help from Doug Enas and used this site https://www.geeksforgeeks.org/python-get-top-n-elements-from-records/ to figure out the last problem and some help from Chris Warren"
 
 import sys
 
 
 def create_word_dict(filename):
     """Returns a word/count dict for the given file."""
-    # Your code here
-    return
-
+    wordCount = {}
+    with open(filename, 'r') as textfile:
+        for line in textfile:
+            for word in line.split():
+                text = word.lower()
+                if text in wordCount:
+                    wordCount[text] += 1
+                else:
+                    wordCount[text] = 1
+    return wordCount
 
 def print_words(filename):
     """Prints one per line '<word> : <count>', sorted
     by word for the given file.
     """
-    # Your code here
-    return
+    word_dict = create_word_dict(filename)
+    for key in sorted(word_dict):
+        print(key, ":", str(word_dict[key]))
+    return word_dict
 
 
 def print_top(filename):
     """Prints the top count listing for the given file."""
-    # Your code here
-    return
+    word_dict = create_word_dict(filename)
+    top_list = sorted(word_dict, key = lambda word: word_dict[word], reverse = True)[:20]
+    for key in top_list:
+        print(key, ":", str(word_dict[key]))
+    return top_list
+    
+    
 
 
 # This basic command line argument parsing code is provided and calls
@@ -56,7 +70,7 @@ def main(args):
     if len(args) != 2:
         print('usage: python wordcount.py {--count | --topcount} file')
         sys.exit(1)
-
+ 
     option = args[0]
     filename = args[1]
 
